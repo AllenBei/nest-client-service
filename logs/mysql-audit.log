@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 15
+    },
+    "auditLog": "logs/mysql-audit.log",
+    "files": [
+        {
+            "date": 1714987985437,
+            "name": "logs/mysql.2024-05-06.log",
+            "hash": "8bc34f2aeb8a5081703ff960ac7ccd696635cc9336ed9008447b8beb33ac10f1"
+        }
+    ],
+    "hashType": "sha256"
+}
