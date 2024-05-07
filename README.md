@@ -3,11 +3,11 @@
 </p> -->
 Language : 🇺🇸 | [🇨🇳](./README.zh-CN.md) 
 
-# nest-client-service
+# [nest-client-service](https://github.com/AllenBei/nest-client-service)
 
 ## INTRODUCTION
 
-This project is a personal library developed based on the `nest.js` framework, designed for quickly setting up a nest.js project.
+This project is a personal library developed based on the `nest.js`+`typeorm`+`mysql`, designed for quickly setting up a nest.js project.
 
 I decided to develop this library because I needed to build a wechat mini program as a full-stack developer.
 I looked at some projects on GitHub for reference, but most were quite comprehensive (with many features not needed).
@@ -95,6 +95,6 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
-## License
+## LICENSE
 
-Licensed under the [MIT](/LICENSE) License.
+[MIT](https://github.com/AllenBei/nest-client-service/blob/main/LICENSE)
