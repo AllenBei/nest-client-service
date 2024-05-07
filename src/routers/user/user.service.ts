@@ -27,7 +27,6 @@ export class UserService {
         private configService: ConfigService,
         // private emailerService: EmailerService,
         private authService: AuthService,
-        private readonly dataSource: DataSource,
         @InjectRepository(User) private readonly userRepository: Repository<User>,
     ) { }
 
@@ -41,13 +40,6 @@ export class UserService {
      * @returns
      */
     public async registerUser(unionid: string, openid: string): Promise<IUserRegisterResponse> {
-        // const emailHandle = userRegisterEmailPrefix(USER_EMAIL_TYPE.REGISTER, email);
-        // //验证注册时邮箱验证码的正确性
-        // const emailCode = await this.redisService.get<string>(emailHandle);
-
-        // if (!emailCode || emailCode !== code) throw new FailException(ERROR_CODE.USER.USER_EMAIL_CODE_ERROR);
-
-
         // 查询unionid存在的用户
         const currentUser = await this.userRepository.findOneBy({ unionid });
         // console.log('currentUser', currentUser)
@@ -95,18 +87,6 @@ export class UserService {
         const { unionid, openid } = res.data
         // console.log('res', res.data)
 
-
-        // 比对登录验证码
-        // const captchaKey = userLoginCaptchaPrefix(hashId);
-        // const storeLoginCaptcha = await this.redisService.get<string>(captchaKey);
-        // if (!storeLoginCaptcha || storeLoginCaptcha !== code) throw new FailException(ERROR_CODE.USER.USER_CAPTCHA_ERROR);
-
-        // 查询用户以及相关的角色
-        // const subQuery = this.dataSource
-        //     .createQueryBuilder(UserRole, 'ur')
-        //     .select(['ur.userId AS userId', 'GROUP_CONCAT(ur.role) AS roles'])
-        //     .groupBy('ur.userId')
-        //     .getQuery();
 
         // const salt = this.configService.get('app.userPwdSalt') || '';
         // const unionidHash = await bcrypt.hash(unionid, salt);
@@ -216,33 +196,7 @@ export class UserService {
         });
         if (!userProfile) throw new FailException(ERROR_CODE.USER.USER_PROFILE_ERROR);
         console.log('userProfile', userProfile)
-        // let access: IUserInfoAccess[];
-
-        // // 如果是管理员权限
-        // if (userProfile.admin === USER_ADMIN.ADMIN) {
-        //     access = await this.dataSource
-        //         .createQueryBuilder(Access, 'access')
-        //         .select(['access.name AS name', 'access.routerName AS routerName', 'access.routerUrl AS routerUrl'])
-        //         .where('access.type=:type', { type: ACCESS_TYPE.MENU })
-        //         .getRawMany();
-        // } else {
-        //     const subQuery = this.dataSource
-        //         .createQueryBuilder(UserRole, 'userRole')
-        //         .select('userRole.role AS id')
-        //         .where('userRole.userId=:userId')
-        //         .getQuery();
-
-        //     access = await this.dataSource
-        //         .createQueryBuilder(RoleAccess, 'roleAccess')
-        //         .select(['access.name AS name', 'access.routerName AS routerName', 'access.routerUrl AS routerUrl'])
-        //         .leftJoin(Access, 'access', 'roleAccess.access=access.id')
-        //         .where(`access.type=:type AND roleAccess.roleId IN (${subQuery})`)
-        //         .setParameters({ userId, type: ACCESS_TYPE.MENU })
-        //         .getRawMany();
-        // }
-
         const { id, username, avatar, gender } = userProfile
-
         return {
             id, username, avatar, gender
             // access
